@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GeauxHack</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/geaux-hack.css">
+  </head>
+  <body>
+    <script>
+      window.GeauxHackENV = {{ENV}};
+      window.EmberENV = window.GeauxHackENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/geaux-hack.js"></script>
+    <script>
+      window.GeauxHack = require('geaux-hack/app')['default'].create(GeauxHackENV.APP);
+    </script>
+  </body>
+</html>
