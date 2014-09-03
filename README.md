@@ -1,6 +1,6 @@
-# Geaux-hack
+![around logo](http://i.dstaley.com/Typecast_-_Public_Demo__Design_in_the_browser_with_web_fonts_and_real_content_2014-08-31_11-17-05_2014-08-31_11-17-11.png)
 
-This README outlines the details of collaborating on this Ember application.
+around is an anonymous, realtime, location-based messenger that connects you with the people nearby. This is the version originally submitted for GeauxHack 2014, so please excuse its flaws.
 
 ## Installation
 
@@ -11,15 +11,4 @@ This README outlines the details of collaborating on this Ember application.
 ## Running
 
 * `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+* Visit http://localhost:4200.
