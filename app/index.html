@@ -5,12 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>GeauxHack</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     {{BASE_TAG}}
 
+    <link href='//fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/geaux-hack.css">
+    
   </head>
   <body>
     <script>
@@ -19,6 +27,7 @@
     </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/geaux-hack.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
     <script>
       window.GeauxHack = require('geaux-hack/app')['default'].create(GeauxHackENV.APP);
     </script>

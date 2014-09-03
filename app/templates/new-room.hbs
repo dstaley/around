@@ -1,0 +1,23 @@
+<header class="bar bar-nav">
+  {{#link-to 'index' classNames="icon icon-bars pull-left"}}{{/link-to}}
+  <h1 class="title">New Room</h1>
+</header>
+
+<div class="content">
+  <div class="card create-room">
+    <form class="input-group">
+      <div class="input-row">
+        <label>Name</label>
+        {{input type="text" placeholder="#geauxhack" value=name}}
+      </div>
+      <div class="input-row">
+        <label>Radius</label>
+        {{input type="number" value=radius placeholder="(in meters)"}}
+      </div>
+    </form>
+    {{#if geolocationService.lat}}
+    {{google-map radius=radius lat=geolocationService.lat lon=geolocationService.lon}}
+    {{/if}}
+  <button class="btn btn-positive btn-block" {{action 'createRoom'}}>Create</button>
+  </div>
+</div>

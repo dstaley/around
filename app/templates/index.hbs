@@ -1,0 +1,46 @@
+{{#if firebaseAuthService.authed}}
+	<header class="bar bar-nav">
+	  {{#link-to 'new-room' classNames="icon icon-plus pull-right"}}{{/link-to}}
+	  {{#link-to 'user' classNames="pull-left icon"}}
+	  	{{gravatar-image size="24" gravatarId=firebaseAuthService.currentUser.md5 classNames="gravatar"}}
+	  {{/link-to}}
+	  <h1 class="title wordmark">around</h1>
+	</header>
+
+	<div class="content">
+	  {{#if firebaseAuthService.authed}}
+	  	{{#if model}}
+	  	<div class="card">
+	  	  <ul class="table-view">
+	  	    {{#each}}
+	  	    <li class="table-view-cell media">
+	  	      {{#link-to 'room' id class="navigate-right"}}
+	  	        <div class="media-body">
+	  	          {{name}}
+	  	        </div>
+	  	      {{/link-to}}
+	  	    </li>
+	  	    {{/each}}
+	  	  </ul>
+	  	</div>
+	  	{{else}}
+	  		<div class="empty-state">
+	  			<div class="inner">
+	  				<p class="empty-icon"><i class="fa fa-bolt"></i></p>
+	  				<p>Huh, nothing here yet. You should fix that!</p>
+	  			</div>
+	  		</div>
+	  	{{/if}}
+	  	{{else}}
+	  	<button class="btn btn-outlined" {{action 'login'}}>Login</button>
+	  	{{/if}}
+	</div>
+{{else}}
+	<div class="login-page">
+		<div class="inner">
+			<h1 class="wordmark">around</h1>
+			<p class="lead">Anonymous, real-time, location-based messaging with the people around you.</p>
+			<button class="btn btn-outlined" {{action 'login'}}>Log in Anonymously</button>
+		</div>
+	</div>
+{{/if}}

@@ -1,8 +1,15 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var mergeTrees = require('broccoli-merge-trees');
+var pickFiles = require('broccoli-static-compiler');
 
 var app = new EmberApp();
+
+app.import({development: 'bower_components/firebase/firebase-debug.js', production: 'bower_components/firebase/firebase.js'});
+app.import({development: 'bower_components/emberfire/dist/emberfire.js', production: 'bower_components/emberfire/dist/emberfire.min.js'});
+app.import({development: 'bower_components/firebase-simple-login/firebase-simple-login.js', production: 'bower_components/firebase-simple-login/firebase-simple-login.js'});
+app.import({development: 'bower_components/js-MD5/js/md5.js', production: 'bower_components/js-MD5/js/md5.min.js'});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -17,4 +24,10 @@ var app = new EmberApp();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-module.exports = app.toTree();
+var fonts = pickFiles('bower_components/ratchet/fonts', {
+  srcDir: '/',
+  files: ['ratchicons.eot', 'ratchicons.svg', 'ratchicons.ttf', 'ratchicons.woff'],
+  destDir: '/fonts'
+});
+
+module.exports = mergeTrees([app.toTree(), fonts]);

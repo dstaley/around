@@ -1,0 +1,30 @@
+<header class="bar bar-nav">
+  {{#link-to 'index' classNames="icon icon-bars pull-left"}}{{/link-to}}
+  <h1 class="title">{{model.name}}</h1>
+</header>
+
+<div class="content">
+	{{#if model.messages}}
+		<ul class="table-view message-list">
+			{{#each message in model.messages}}
+		  <li class="table-view-cell media">
+		      {{gravatar-image size="42" gravatarId=message.author classNames="media-object pull-left"}}
+		      <div class="media-body">
+		        <p>{{message.text}}</p>
+		      </div>
+		  </li>
+		  {{/each}}
+		</ul>
+	{{else}}
+		<div class="empty-state">
+			<div class="inner">
+				<p class="empty-icon"><i class="fa fa-comments-o"></i></p>
+				<p>Woohoo! A clean slate. Why don't you say something?</p>
+			</div>
+		</div>
+	{{/if}}
+</div>
+
+<div class="bar bar-standard bar-footer">
+{{input type="text" value=text action="sendMessage" focus-in="scrollIntoView"}}
+</div>

@@ -1,0 +1,11 @@
+<li>{{gravatar-image size="40" gravatarId=author}}{{text}}
+
+{{#if firebaseAuthService.authed }}
+	{{#if isLiked}}
+		<button {{action 'unlikeMessage' message}}>Unlike</button>
+	{{else}}
+		<button {{action 'likeMessage' message}}>Like</button>
+	{{/if}} 
+{{/if}}
+
+{{ likes }} likes</li>

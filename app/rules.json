@@ -1,0 +1,16 @@
+{
+  "rules": {
+     "rooms": {
+        "$room_id": {
+          ".read": true,
+           "messages": {
+             ".write": "!data.exists() && newData.exists() && auth != null"
+           }
+        }
+     },
+     "users": {
+       ".read": true,
+       ".write": "!data.exists() && newData.exists()"
+     }
+  }
+}
