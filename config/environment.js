@@ -23,7 +23,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.APP.firebaseURL = 'https://aroundtesting.firebaseio.com';
+    ENV.APP.firebaseURL = 'https://geauxhack.firebaseio.com';
   }
 
   if (environment === 'test') {

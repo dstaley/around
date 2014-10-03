@@ -9,7 +9,10 @@ var app = new EmberApp();
 app.import({development: 'bower_components/firebase/firebase-debug.js', production: 'bower_components/firebase/firebase.js'});
 app.import({development: 'bower_components/emberfire/dist/emberfire.js', production: 'bower_components/emberfire/dist/emberfire.min.js'});
 app.import({development: 'bower_components/firebase-simple-login/firebase-simple-login.js', production: 'bower_components/firebase-simple-login/firebase-simple-login.js'});
-app.import({development: 'bower_components/js-MD5/js/md5.js', production: 'bower_components/js-MD5/js/md5.min.js'});
+app.import({development: 'bower_components/md5-jkmyers/md5.js', production: 'bower_components/md5-jkmyers/md5.min.js'});
+app.import({development: 'bower_components/geofire/dist/geofire.js', production: 'bower_components/geofire/dist/geofire.min.js'});
+app.import({development: 'bower_components/rsvp/rsvp.js', production: 'bower_components/rsvp/rsvp.min.js'});
+app.import({development: 'bower_components/Autolinker.js/dist/Autolinker.js', production: 'bower_components/Autolinker.js/dist/Autolinker.min.js'});
 
 // Use `app.import` to add additional libraries to the generated
 // output files.

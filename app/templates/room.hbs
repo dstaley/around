@@ -1,5 +1,5 @@
 <header class="bar bar-nav">
-  {{#link-to 'index' classNames="icon icon-bars pull-left"}}{{/link-to}}
+  {{#link-to 'index' classNames="icon icon-left-nav pull-left"}}{{/link-to}}
   <h1 class="title">{{model.name}}</h1>
 </header>
 
@@ -7,10 +7,10 @@
 	{{#if model.messages}}
 		<ul class="table-view message-list">
 			{{#each message in model.messages}}
-		  <li class="table-view-cell media">
+		  <li class="table-view-cell media message">
 		      {{gravatar-image size="42" gravatarId=message.author classNames="media-object pull-left"}}
 		      <div class="media-body">
-		        <p>{{message.text}}</p>
+		        <p class="message-text">{{auto-link message.text}}</p>
 		      </div>
 		  </li>
 		  {{/each}}
@@ -25,6 +25,13 @@
 	{{/if}}
 </div>
 
-<div class="bar bar-standard bar-footer">
-{{input type="text" value=text action="sendMessage" focus-in="scrollIntoView"}}
+<div class="bar bar-standard bar-footer compose-bar">
+	<div class="compose-bar-wrapper">
+		<div class="fill-space">
+			{{input type="text" value=text action="sendMessage" focus-in="scrollIntoView"}}	
+		</div>
+		{{#if text}}
+		<i class="fa fa-send" {{action 'sendMessage'}}></i>
+		{{/if}}
+	</div>
 </div>

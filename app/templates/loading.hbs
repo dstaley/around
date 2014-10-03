@@ -1,5 +1,23 @@
-<div class="empty-state">
-	  			<div class="inner">
-	  				<p class="empty-icon"><i class="fa fa-bolt"></i></p>
-	  			</div>
-	  		</div>
+{{#if firebaseAuthService.authed}}
+	<header class="bar bar-nav">
+	  <h1 class="title wordmark">around</h1>
+	</header>
+
+	<div class="content">
+		{{#unless geolocationService.hasLocation}}
+			<div class="empty-state">
+				<div class="inner">
+					<p class="empty-icon"><i class="fa fa-map-marker"></i></p>
+					<p>Waiting for location...</p>
+				</div>
+			</div>
+		{{/unless}}
+	</div>
+{{else}}
+	<div class="empty-state">
+		<div class="inner">
+			<p class="empty-icon"><i class="fa fa-map-marker"></i></p>
+			<p>Waiting for location...</p>
+		</div>
+	</div>
+{{/if}}

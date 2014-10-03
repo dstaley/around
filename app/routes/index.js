@@ -2,16 +2,20 @@ import Ember from "ember";
 import pointDistance from "../utils/point-distance";
 
 export default Ember.Route.extend({
-	model: function(){
+	model: function() {
 		var route = this;
-		return route.get('geolocationService').getLocation().then(function(location){
-			return route.store.findAll('room').then(function(){
-				return route.store.filter('room', function(room){
-					var room_position = {lat: room.get('lat'), lon: room.get('lon'), radius: room.get('radius')};
-					var distance_from_room = pointDistance(location,[room_position.lat, room_position.lon]);
-					return distance_from_room * 1000 < room_position.radius;
-				});
-			});
+		return this.store.filter('room', function(room){
+			if (room.get('isLoaded')) {
+				var location = route.geolocationService.location.coords;
+				var roomLocation = [room.get('l')[0], room.get('l')[1]];
+				var distanceFromRoom = pointDistance([location.latitude, location.longitude], roomLocation) * 1000;
+				return room.get('isLoaded') && distanceFromRoom < room.get('r');
+			} else {
+				return false;
+			}
 		});
+	}.observes('geolocationService.location'),
+	actions: {
+		didTransition: function() {$(document).attr('title', 'around');}
 	}
 });

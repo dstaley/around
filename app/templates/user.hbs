@@ -1,5 +1,5 @@
 <header class="bar bar-nav">
-	  {{#link-to 'index' classNames="icon icon-bars pull-left"}}{{/link-to}}
+	  {{#link-to 'index' classNames="icon icon-left-nav pull-left"}}{{/link-to}}
 	  <h1 class="title">You</h1>
 	</header>
 
@@ -7,7 +7,7 @@
 	  <div class="user-info">
 	  	{{#if firebaseAuthService.authed}}{{gravatar-image size="100" gravatarId=firebaseAuthService.currentUser.md5}}
 	  	<div class="card">
-	  	{{#if geolocationService.lat}}{{google-map radius=0 lat=geolocationService.lat lon=geolocationService.lon zoom=18}}{{/if}}
+	  	{{#if geolocationService.hasLocation}}{{google-map radius=0 lat=geolocationService.location.coords.latitude lon=geolocationService.location.coords.longitude zoom=18}}{{/if}}
 	  	<button class="btn btn-negative btn-block" {{action 'logout'}}>Logout</button></div>{{/if}}
 	  </div>
 	</div>

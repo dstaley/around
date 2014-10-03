@@ -1,0 +1,71 @@
+{
+	"rules": {
+		".read": true,
+		".write": true,
+		"rooms": {
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$room_id": {
+				".validate": "newData.hasChildren(['name', 'r', 'l', 'g'])",
+				".write": "!data.exists() && newData.exists()",
+				"name": {
+					".validate": "newData.isString() && newData.val().length > 0"
+				},
+				"r": {
+					".validate": "newData.isNumber() && newData.val() <= 3000"
+				},
+				"l": {
+					"0": {
+						".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90"
+					},
+					"1": {
+						".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180"
+					},
+					"$other": {
+						".validate": false
+					}
+				},
+				"g": {
+					".validate": "newData.isString() && newData.val().length > 0"
+				},
+				"messages": {
+					"$message_id": {
+						".validate": "newData.hasChildren(['author', 'text', 'timestamp'])",
+						".write": "!data.exists() && newData.exists()",
+						"author": {
+							".validate": "newData.isString()"
+						},
+						"text": {
+							".validate": "newData.isString() && newData.val().length > 0"
+						},
+						"timestamp": {
+							".validate": "newData.val() <= now"
+						}
+					}
+				}
+			}
+		},
+		"geofire-rooms": {
+			".read": "auth !== null",
+			".write": "auth !== null",
+			"$room_id": {
+				".validate": "newData.hasChildren(['l', 'g'])",
+				".write": "!data.exists() && newData.exists()",
+				"l": {
+					"0": {
+						".validate": "newData.isNumber() && newData.val() >= -90 && newData.val() <= 90"
+					},
+					"1": {
+						".validate": "newData.isNumber() && newData.val() >= -180 && newData.val() <= 180"
+					},
+					"$other": {
+						".validate": false
+					}
+				},
+				"g": {
+					".validate": "newData.isString() && newData.val().length > 0"
+				}
+			}
+		}
+	}
+}

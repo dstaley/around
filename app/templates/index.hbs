@@ -1,46 +1,65 @@
 {{#if firebaseAuthService.authed}}
 	<header class="bar bar-nav">
-	  {{#link-to 'new-room' classNames="icon icon-plus pull-right"}}{{/link-to}}
-	  {{#link-to 'user' classNames="pull-left icon"}}
-	  	{{gravatar-image size="24" gravatarId=firebaseAuthService.currentUser.md5 classNames="gravatar"}}
-	  {{/link-to}}
-	  <h1 class="title wordmark">around</h1>
+		{{#unless supportsImports}}{{#link-to 'new-room' classNames="icon icon-plus pull-right"}}{{/link-to}}{{/unless}}
+		{{#link-to 'about' classNames="icon icon-more-vertical pull-right"}}{{/link-to}}
+		{{#link-to 'user' classNames="pull-left icon"}}
+			{{gravatar-image size="24" gravatarId=firebaseAuthService.currentUser.md5 classNames="gravatar"}}
+		{{/link-to}}
+		<h1 class="title wordmark">around</h1>
 	</header>
 
 	<div class="content">
-	  {{#if firebaseAuthService.authed}}
-	  	{{#if model}}
-	  	<div class="card">
-	  	  <ul class="table-view">
-	  	    {{#each}}
-	  	    <li class="table-view-cell media">
-	  	      {{#link-to 'room' id class="navigate-right"}}
-	  	        <div class="media-body">
-	  	          {{name}}
-	  	        </div>
-	  	      {{/link-to}}
-	  	    </li>
-	  	    {{/each}}
-	  	  </ul>
-	  	</div>
-	  	{{else}}
-	  		<div class="empty-state">
-	  			<div class="inner">
-	  				<p class="empty-icon"><i class="fa fa-bolt"></i></p>
-	  				<p>Huh, nothing here yet. You should fix that!</p>
-	  			</div>
-	  		</div>
-	  	{{/if}}
-	  	{{else}}
-	  	<button class="btn btn-outlined" {{action 'login'}}>Login</button>
-	  	{{/if}}
+		{{#if geolocationService.hasLocation}}
+			{{#if model}}
+				<div class="card">
+					<ul class="table-view">
+						{{#each model}}
+							<li class="table-view-cell media">
+								{{#link-to 'room' id class="navigate-right"}}
+									<div class="media-body">
+										{{name}}
+									</div>
+								{{/link-to}}
+							</li>
+						{{/each}}
+					</ul>
+				</div>
+			{{else}}
+				<div class="empty-state">
+					<div class="inner">
+						<p class="empty-icon"><i class="fa fa-circle-o"></i></p>
+						<p>Huh, nothing here yet. You should fix that!</p>
+						{{#each model}}{{name}}{{/each}}
+					</div>
+				</div>
+			{{/if}}
+		{{else}}
+			<div class="empty-state">
+				<div class="inner">
+					<p class="empty-icon"><i class="fa fa-map-marker"></i></p>
+					<p>Waiting for location...</p>
+				</div>
+			</div>
+		{{/if}}
 	</div>
+	{{#if supportsImports}}{{#link-to 'new-room'}}<paper-fab icon="add"></paper-fab>{{/link-to}}{{/if}}
 {{else}}
-	<div class="login-page">
-		<div class="inner">
-			<h1 class="wordmark">around</h1>
-			<p class="lead">Anonymous, real-time, location-based messaging with the people around you.</p>
-			<button class="btn btn-outlined" {{action 'login'}}>Log in Anonymously</button>
+	{{#if firebaseAuthService.waitingForUser}}
+		<div class="content">
+			<div class="empty-state">
+				<div class="inner">
+					<p class="empty-icon"><i class="fa fa-spin fa-cog"></i></p>
+					<p>Setting everything up</p>
+				</div>
+			</div>
 		</div>
-	</div>
+	{{else}}
+		<div class="login-page">
+			<div class="inner">
+				<h1 class="wordmark">around</h1>
+				<p class="lead">Anonymous, real-time, location-based messaging with the people around you.</p>
+				<button class="btn btn-outlined" {{action 'login'}}>Log in Anonymously</button>
+			</div>
+		</div>
+	{{/if}}
 {{/if}}

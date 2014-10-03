@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
 	authed: false,
+	waitingForUser: true,
 	currentUser: null,
 
 	init: function() {
@@ -10,12 +11,11 @@ export default Ember.Object.extend({
 		var service = this;
 		this.authClient = new FirebaseSimpleLogin(ref, function(error, firebase_user){
 			if (error !== null) {
-				alert("Authentication failed");
-				console.log(error);
-				// Transition to index or something
+				Bugsnag.notifyException(error, "FirebaseSimpleLoginError");
 			} else if (firebase_user !== null) {
 				store.find('user', firebase_user.uid).then(function(user){
 					service.set('currentUser', user);
+					service.set('waitingForUser', false);
 					service.set('authed', true);
 				}, function(){
 					delete store.typeMapFor(store.modelFor('user')).idToRecord[firebase_user.uid];
@@ -24,10 +24,12 @@ export default Ember.Object.extend({
 						md5: md5(firebase_user.uid)
 					}).save().then(function(user){
 						service.set('currentUser', user);
+						service.set('waitingForUser', false);
 						service.set('authed', true);
 					});
 				});
 			} else {
+				this.set('waitingForUser', false);
 				this.set('authed', false);
 			}
 		}.bind(this));

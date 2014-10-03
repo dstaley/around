@@ -1,5 +1,5 @@
 <header class="bar bar-nav">
-  {{#link-to 'index' classNames="icon icon-bars pull-left"}}{{/link-to}}
+  {{#link-to 'index' classNames="icon icon-left-nav pull-left"}}{{/link-to}}
   <h1 class="title">New Room</h1>
 </header>
 
@@ -12,11 +12,11 @@
       </div>
       <div class="input-row">
         <label>Radius</label>
-        {{input type="number" value=radius placeholder="(in meters)"}}
+        {{input type="range" value=radius min=10 max=3000 step=10}}
       </div>
     </form>
-    {{#if geolocationService.lat}}
-    {{google-map radius=radius lat=geolocationService.lat lon=geolocationService.lon}}
+    {{#if geolocationService.hasLocation}}
+    {{google-map radius=radius lat=geolocationService.location.coords.latitude lon=geolocationService.location.coords.longitude}}
     {{/if}}
   <button class="btn btn-positive btn-block" {{action 'createRoom'}}>Create</button>
   </div>
