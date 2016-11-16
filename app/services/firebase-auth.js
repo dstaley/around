@@ -10,9 +10,7 @@ export default Ember.Object.extend({
 		var ref = store.adapterFor('application').get('firebase');
 		var service = this;
 		this.authClient = new FirebaseSimpleLogin(ref, function(error, firebase_user){
-			if (error !== null) {
-				Bugsnag.notifyException(error, "FirebaseSimpleLoginError");
-			} else if (firebase_user !== null) {
+			if (firebase_user !== null) {
 				store.find('user', firebase_user.uid).then(function(user){
 					service.set('currentUser', user);
 					service.set('waitingForUser', false);

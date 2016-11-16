@@ -1,6 +1,6 @@
 {{#if firebaseAuthService.authed}}
 	<header class="bar bar-nav">
-		{{#unless supportsImports}}{{#link-to 'new-room' classNames="icon icon-plus pull-right"}}{{/link-to}}{{/unless}}
+		{{#link-to 'new-room' classNames="icon icon-plus pull-right"}}{{/link-to}}
 		{{#link-to 'about' classNames="icon icon-more-vertical pull-right"}}{{/link-to}}
 		{{#link-to 'user' classNames="pull-left icon"}}
 			{{gravatar-image size="24" gravatarId=firebaseAuthService.currentUser.md5 classNames="gravatar"}}
@@ -42,7 +42,6 @@
 			</div>
 		{{/if}}
 	</div>
-	{{#if supportsImports}}{{#link-to 'new-room'}}<paper-fab icon="add"></paper-fab>{{/link-to}}{{/if}}
 {{else}}
 	{{#if firebaseAuthService.waitingForUser}}
 		<div class="content">

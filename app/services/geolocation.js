@@ -19,7 +19,6 @@ export default Ember.Object.extend({
 						service.set('hasLocation', true);
 						resolve(position);
 					}, function(error) {
-						Bugsnag.notifyException(error, "GeolocationServiceError");
 						reject(error);
 					}, service.options);
 				}

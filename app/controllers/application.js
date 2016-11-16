@@ -37,14 +37,6 @@ export default Ember.Controller.extend({
 			});
 			// console.log(key + " exited query to " + location + " (" + distance + " km from center)");
 		});
-
-		Bugsnag.notifyReleaseStages = ["production"];
-
-		if (GeauxHackENV.environment === 'development') {
-			Bugsnag.releaseStage = "development";
-		} else if (GeauxHackENV.environment === 'production') {
-			Bugsnag.releaseStage = "production";
-		}
 	},
 	locationChanged: function() {
 		var controller = this;
